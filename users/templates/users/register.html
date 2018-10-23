@@ -1,0 +1,21 @@
+{% extends 'blog/base.html' %} {# można sobie tak po poprostu rozszeżyć html'a z innego folderu... #}
+{% load crispy_forms_tags %}    {# to do obróbki automatycznych formularzy, zadeklarowane w 'settings.py' #}
+{% block content %}
+    <div class="content-section">
+        <form method="POST">{# zakładamy metodę POST, żeby ktoś nie wykorzystał formularza do GET-wyciągnięcia danych #}
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Join Today</legend>
+                {{ form|crispy }}      {# automatyczny formularz do rejestrowania nowych użytkowników, | po znaczniku dodajemy filtry #}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Sign Up</button>
+            </div>
+        </form>
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                Already Have An Account? <a class="ml-2" href="{% url 'login' %}">Login</a>
+            </small>
+        </div>
+    </div>
+{% endblock content%}
